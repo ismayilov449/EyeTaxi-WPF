@@ -26,8 +26,7 @@ namespace EyeTaxi2019.Repository
             
         }
 
-         
-
+          
         public IQueryable<T> FindUser()
         {
             return DbSet;

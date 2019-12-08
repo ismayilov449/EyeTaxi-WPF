@@ -14,7 +14,7 @@ namespace EyeTaxi2019.Command
             add { CommandManager.RequerySuggested += value; }
             remove { CommandManager.RequerySuggested += value; }
         }
-
+        
         private Action<object> _execute;
         private Predicate<object> _canExecute;
 
