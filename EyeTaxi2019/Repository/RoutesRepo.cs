@@ -15,7 +15,7 @@ namespace EyeTaxi2019.Repo
         public static ObservableCollection<Route> GetRoutes()
         {
             ObservableCollection<Route> Routes;
-            var json = File.ReadAllText("Routes.json");
+            var json = File.ReadAllText("../../Resources/Routes.json");
             Routes = JsonConvert.DeserializeObject<ObservableCollection<Route>>(json);
             return Routes;
         }

@@ -18,7 +18,7 @@ namespace EyeTaxi2019.Repo
         public static ObservableCollection<Driver> GetDrivers()
         {
             ObservableCollection<Driver> Drivers;
-            var json = File.ReadAllText("Drivers.json");
+            var json = File.ReadAllText("../../Resources/Drivers.json");
             Drivers = JsonConvert.DeserializeObject<ObservableCollection<Driver>>(json);
 
             return Drivers;

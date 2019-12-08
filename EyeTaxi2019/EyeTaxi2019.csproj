@@ -182,6 +182,9 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="Resources\Drivers.json" />
+    <None Include="Resources\Price.json" />
+    <None Include="Resources\Routes.json" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

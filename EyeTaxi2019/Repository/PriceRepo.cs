@@ -14,7 +14,7 @@ namespace EyeTaxi2019.Repo
     {
         public static string GetPrice()
         {
-            string json = File.ReadAllText("Price.json");
+            string json = File.ReadAllText("../../Resources/Price.json");
 
             return json;
         }
