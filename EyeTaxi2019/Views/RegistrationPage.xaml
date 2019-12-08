@@ -1,0 +1,71 @@
+﻿<Page x:Class="EyeTaxi2019.Views.RegistrationPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:local="clr-namespace:EyeTaxi2019.Views"
+      mc:Ignorable="d"
+      Title="RegistrationPage">
+    
+    <Grid >
+
+        <Image  Source="/EyeTaxi2019;component/Images/taxi_town.jpg" Stretch="Fill"></Image>
+
+
+
+        <GroupBox Width="360" Height="520" Header="Registration"  Margin="0,15,0,35" VerticalAlignment="Center" HorizontalAlignment="Center" Background="White" Style="{DynamicResource MaterialDesignCardGroupBox}">
+            <GroupBox.HeaderTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="Taxi" Height="32" Width="32" VerticalAlignment="Center" />
+                        <TextBlock Margin="8,0,0,0" VerticalAlignment="Center"  Style="{StaticResource MaterialDesignSubheadingTextBlock}" Text="{Binding}" />
+                    </StackPanel>
+                </DataTemplate>
+            </GroupBox.HeaderTemplate>
+
+            <StackPanel>
+
+                <TextBox Name="tbFirstname" Margin="3"   HorizontalAlignment="Center" Width="300"
+                         Text="{Binding CurrentRoute.Driver.Name}" materialDesign:HintAssist.Hint="First Name"
+                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" > </TextBox>
+
+                <TextBox Name="tbLastname"  Margin="3"  HorizontalAlignment="Center" Width="300" 
+                         Text="{Binding CurrentRoute.Driver.Name}" materialDesign:HintAssist.Hint="Last Name"
+                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" > </TextBox>
+
+                <TextBox Name="tbPhoneNumber" Margin="3"   HorizontalAlignment="Center" Width="300" 
+                         Text="{Binding CurrentRoute.Driver.Name}" materialDesign:HintAssist.Hint="Phone Number"
+                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" > </TextBox>
+
+                <TextBox Name="tbMail" Margin="3"   HorizontalAlignment="Center" Width="300" 
+                         Text="{Binding CurrentRoute.Driver.Name}" materialDesign:HintAssist.Hint="Mail"
+                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" > </TextBox>
+
+
+                <TextBox Name="tbUsername" Margin="3"   HorizontalAlignment="Center" Width="300" 
+                         Text="{Binding CurrentRoute.Driver.Name}" materialDesign:HintAssist.Hint="Username"
+                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" > </TextBox>
+
+
+                <PasswordBox Name="pbPassword" Margin="3" HorizontalAlignment="Center" Width="300"  
+                             materialDesign:HintAssist.Hint="Password"
+                             Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" > </PasswordBox>
+
+
+                <PasswordBox Name="pbConfirm" Margin="3" HorizontalAlignment="Center" Width="300"  
+                             materialDesign:HintAssist.Hint="Confirm Password"
+                             Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" > </PasswordBox>
+
+
+                <Button Width="200" Margin="3,25,3,5" Command="{Binding SendCodeCommand}" >Send Code</Button>
+                <TextBox Name="tbVerifyCode" Margin="3" Width="200" Background="White" BorderThickness="1"></TextBox>
+                <Button Width="200"   Margin="3" Command="{Binding SignUpCommand}" >Sign Up</Button>
+
+
+            </StackPanel>
+        </GroupBox>
+
+
+    </Grid>
+</Page>

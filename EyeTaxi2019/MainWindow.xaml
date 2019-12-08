@@ -1,0 +1,258 @@
+﻿<Window x:Class="BingMap.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:map="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:BingMap"
+        mc:Ignorable="d"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        WindowState="Maximized" 
+        Title="MainWindow" Height="450" Width="800" WindowStartupLocation="CenterScreen" WindowStyle="None"  AllowsTransparency="True" Background="{x:Null}" Icon="Images/taxi.png">
+
+
+
+
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+
+
+
+        <map:Map Name="myMap" Center="40.4093,49.8671" Grid.RowSpan="2" Grid.Row="0"> </map:Map>
+
+
+
+        <materialDesign:ColorZone
+             Mode="PrimaryDark"  Padding="16" CornerRadius="5" materialDesign:ShadowAssist.ShadowDepth="Depth3" Grid.Row="0" Margin="15" MouseDown="ColorZone_MouseDown">
+            <DockPanel>
+
+                <Button  DockPanel.Dock="Right" Padding="0,0,0,0" Background="Transparent" Click="BtnClose_Click"
+    Style="{StaticResource MaterialDesignRaisedButton}"
+    Width="30"
+    ToolTip="Close"
+    materialDesign:RippleAssist.Feedback="#DD000000">
+                    <materialDesign:PackIcon Kind="Close"/>
+                </Button>
+                <Button  DockPanel.Dock="Right" Padding="0,0,0,0" Background="Transparent" Click="BtnMaxOrNorm_Click"
+    Style="{StaticResource MaterialDesignRaisedButton}"
+    Width="30"
+    ToolTip="Restore Down"
+    materialDesign:RippleAssist.Feedback="#DD000000">
+                    <materialDesign:PackIcon Kind="WindowMaximize"/>
+                </Button>
+                <Button  DockPanel.Dock="Right" Padding="0,0,0,0" Background="Transparent"  Click="BtnMinimize_Click"
+    Style="{StaticResource MaterialDesignRaisedButton}"
+    Width="30"
+    ToolTip="Minimize"
+    materialDesign:RippleAssist.Feedback="#DD000000">
+                    <materialDesign:PackIcon Kind="WindowMinimize"/>
+                </Button>
+
+
+
+
+                <StackPanel Orientation="Horizontal" materialDesign:RippleAssist.IsCentered="True">
+                    <ToggleButton x:Name="ToggleButtonOpen" Cursor="Hand" Click="ToggleButton_Click" Style="{DynamicResource MaterialDesignHamburgerToggleButton}"></ToggleButton>
+                    <materialDesign:ColorZone Mode="Standard" Padding="8 4 8 4" CornerRadius="2" Panel.ZIndex="1"  Margin="16 0 0 0" materialDesign:ShadowAssist.ShadowDepth="Depth1">
+                        <Grid>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <TextBox  x:Name="tbSearch" Text="Mado" Grid.Column="1" Margin="8 0 0 0" materialDesign:HintAssist.Hint="Search"
+                                     materialDesign:TextFieldAssist.DecorationVisibility="Hidden" BorderThickness="0"  MinWidth="200" VerticalAlignment="Center" KeyDown="TbSearch_KeyDown" >
+                            </TextBox>
+
+                            <Button x:Name="btnSearch" Click="BtnSearch_Click" Command="{Binding SearchCommand}" Cursor="Hand" Style="{DynamicResource MaterialDesignToolButton}" Grid.Column="2">
+                                <materialDesign:PackIcon Kind="Magnify" Opacity=".56" Margin="8 0 0 0" />
+                            </Button>
+
+                        </Grid>
+                    </materialDesign:ColorZone>
+
+
+                    <Button x:Name="Btn_CurrentLocation" Margin="8,0,0,0" Command="{Binding CurrentLocationCommand}"  Padding="0" Background="Transparent"  
+                            Style="{StaticResource MaterialDesignRaisedButton}"
+                            Width="30" Height="30" materialDesign:RippleAssist.Feedback="#DD000000">
+                        <materialDesign:PackIcon Width="20" Height="20" Kind="MyLocation"/>
+                    </Button>
+
+                    
+                </StackPanel>
+            </DockPanel>
+        </materialDesign:ColorZone>
+
+
+
+
+
+        <Border Grid.Row="1" HorizontalAlignment="Left" Margin="0,30,0,45" Background="#C0C0C8" CornerRadius="0,5,5,0" Opacity="0.9">
+            <Grid x:Name="GridMenu" Width="0">
+                <materialDesign:Card Margin="10" Background="{DynamicResource MaterialDesignBackground}">
+                    <StackPanel>
+                        <Expander BorderThickness="5,0,0,0" BorderBrush="#1976d2" HorizontalAlignment="Stretch" Header="Account">
+                            <StackPanel>
+                                <Image Height="72" Width="72" Margin="10" Source="Images/UserProfile.png" Stretch="UniformToFill" ></Image>
+                                <TextBlock HorizontalAlignment="Left" Margin="10,5" >Name</TextBlock>
+                                <TextBlock HorizontalAlignment="Left" Margin="20,0" Foreground="Black" FontSize="16" Text="{Binding CurrentUser.FirstName}"></TextBlock>
+                                <TextBlock HorizontalAlignment="Left" Margin="10,5">Surname</TextBlock>
+                                <TextBlock HorizontalAlignment="Left" Margin="20,0" Foreground="Black" FontSize="16" Text="{Binding CurrentUser.LastName}"></TextBlock>
+                                <TextBlock HorizontalAlignment="Left" Margin="10,5">Phone Number</TextBlock>
+                                <TextBlock HorizontalAlignment="Left" Margin="20,0,20,10" Foreground="Black" FontSize="16" Text="{Binding CurrentUser.PhoneNumber}"></TextBlock>
+                            </StackPanel>
+                        </Expander>
+                        <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" />
+                        <Expander BorderThickness="5,0,0,0" BorderBrush="#1976d2" HorizontalAlignment="Stretch" Header="Mode">
+                            <StackPanel>
+                                <StackPanel Orientation="Horizontal" Cursor="Hand" MouseLeftButtonDown="RoadModeChanged_Click">
+                                    <StackPanel.Effect>
+                                        <DropShadowEffect Color="#FF34AFD4" ShadowDepth="1"/>
+                                    </StackPanel.Effect>
+                                    <Image  Margin="25,0"  VerticalAlignment="Center" Source="Images/RoadMode.PNG" Height="32" Width="32" ></Image>
+                                    <TextBlock  VerticalAlignment="Center" Foreground="Black" FontSize="16">Road</TextBlock>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Cursor="Hand" MouseLeftButtonDown="AriealModeChanged_Click">
+                                    <StackPanel.Effect>
+                                        <DropShadowEffect Color="#FF34AFD4" ShadowDepth="1"/>
+                                    </StackPanel.Effect>
+                                    <Image Margin="25,0" VerticalAlignment="Center" Source="Images/AriealMode.PNG" Height="32" Width="32" ></Image>
+
+                                    <TextBlock  FontSize="16" VerticalAlignment="Center" Foreground="Black">Arieal</TextBlock>
+                                    <TextBlock Margin="30,0,5,0" VerticalAlignment="Center"  FontSize="12">Label</TextBlock>
+                                    <ToggleButton  VerticalAlignment="Center"   x:Name="ToggleBtnLabel" Style="{StaticResource MaterialDesignSwitchToggleButton}" 
+                                                          ToolTip="RoadMode" Click="ToggleBtnLabel_Click">
+                                        <materialDesign:PackIcon  Kind="Pin" RenderTransformOrigin=".5,.5">
+                                            <materialDesign:PackIcon.RenderTransform>
+                                                <RotateTransform
+                                                            Angle="45" />
+                                            </materialDesign:PackIcon.RenderTransform>
+                                        </materialDesign:PackIcon>
+                                        <materialDesign:ToggleButtonAssist.OnContent>
+                                            <materialDesign:PackIcon Kind="Pin" />
+                                        </materialDesign:ToggleButtonAssist.OnContent>
+                                    </ToggleButton>
+                                </StackPanel>
+                            </StackPanel>
+                        </Expander>
+                        <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" />
+                        <Expander   BorderThickness="5,0,0,0" BorderBrush="#1976d2" HorizontalAlignment="Stretch" Height="580" Header="History">
+                            <materialDesign:DialogHost  HorizontalAlignment="Center" VerticalAlignment="Center" >
+                                <materialDesign:DialogHost.DialogContent>
+                                    <StackPanel  Margin="5">
+                                        <Border Height="{Binding ListViewHistory.Items.Count*10}" MaxHeight="400" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Visible"  CornerRadius="7,7,0,0" BorderThickness="0" Background="{DynamicResource MaterialDesignDivider}">
+                                            <ListView    ItemsSource="{Binding History}" x:Name="ListViewHistory" >
+                                                <ListView.View >
+                                                    <GridView  >
+                                                        <GridViewColumn  DisplayMemberBinding="{Binding Id}" Header="Id" />
+                                                        <GridViewColumn  DisplayMemberBinding="{Binding Distance}" Header="Distance" />
+                                                        <GridViewColumn  DisplayMemberBinding="{Binding Duration}" Header="Duration" />
+                                                        <GridViewColumn  DisplayMemberBinding="{Binding Price}" Header="Price" />
+                                                        <GridViewColumn  DisplayMemberBinding="{Binding Driver.Name}" Header="Driver name" />
+                                                        <GridViewColumn  DisplayMemberBinding="{Binding StartLocationName}" Header="From" />
+                                                        <GridViewColumn  DisplayMemberBinding="{Binding EndLocationName}" Header="To" />
+                                                    </GridView>
+                                                </ListView.View>
+                                            </ListView>
+                                        </Border>
+                                        <Button Style="{StaticResource MaterialDesignFlatButton}" IsCancel="True" 
+                                        Command="materialDesign:DialogHost.CloseDialogCommand"
+                                        ToolTip="Route History">
+                                            <Button.CommandParameter>
+                                                <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
+                                                    False
+                                                </system:Boolean>
+                                            </Button.CommandParameter>
+                                            CANCEL
+                                        </Button>
+                                    </StackPanel>
+                                </materialDesign:DialogHost.DialogContent>
+
+
+
+                                <Button x:Name="Btn_History"  Style="{StaticResource MaterialDesignRaisedButton}"
+                                        Background="{DynamicResource MaterialDesignDivider}" Foreground="#1976d2"
+                                        Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" >View History</Button>
+
+
+
+                            </materialDesign:DialogHost>
+                        </Expander>
+                    </StackPanel>
+                </materialDesign:Card>
+            </Grid>
+        </Border>
+
+
+
+
+        <Border Grid.Row="1"  HorizontalAlignment="Left" Margin="15,30,0,45" Background="#C0C0C8" CornerRadius="0,5,5,0" Opacity="0.9">
+            <Grid  x:Name="GridSearchMenu" Width="0">
+                <materialDesign:Card  Margin="10" Background="{DynamicResource MaterialDesignBackground}">
+                    <StackPanel   Orientation="Vertical">
+                        <Rectangle Style="{StaticResource myRectangleStyle}" Height="50"></Rectangle>
+
+
+                        <Border Height="630"   Background="{DynamicResource MaterialDesignBackground}">
+                            <ListView ScrollViewer.HorizontalScrollBarVisibility="Hidden" x:Name="ListViewSearch" ScrollViewer.CanContentScroll="True">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel >
+                                        <Border >
+                                            <StackPanel Orientation="Horizontal">
+                                                <Image Margin="2,0,10,0" Source="{Binding Icon}" HorizontalAlignment="Left" Stretch="UniformToFill" Width="16" Height="16"/>
+                                                <TextBlock Text="{Binding Name}"></TextBlock>
+                                            </StackPanel>
+                                        </Border>
+                                            
+                                            <TextBlock Margin="2" Text="{Binding Adress}"></TextBlock>
+
+                                        <StackPanel Orientation="Horizontal">
+                                                <TextBlock Margin="2,0,10,0" Text="Raiting" FontSize="16" Foreground="Black" VerticalAlignment="Center"></TextBlock>
+                                                <materialDesign:RatingBar VerticalAlignment="Center" FontSize="14" Value="{Binding Raiting}" IsReadOnly="True"/>
+                                                <Button  Tag="{Binding Location}" Command="{Binding DirectionCommand}" Click="Btn_Direction_Click" Margin="25,0,0,0"   Padding="0" Background="#1976d2"  
+                                                         Style="{StaticResource MaterialDesignRaisedButton}"
+                                                         Width="24" Height="24" ToolTip="Direction" materialDesign:RippleAssist.Feedback="#DD000000">
+                                                    <materialDesign:PackIcon Width="20" Height="20" Kind="Directions"/>
+                                                </Button>
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </Border>
+                    </StackPanel>
+                </materialDesign:Card>
+            </Grid>
+        </Border>
+
+
+
+
+
+        <Slider Grid.Row="1"  HorizontalAlignment="Right"  VerticalAlignment="Center" Margin="5" Height="100"
+                 TickFrequency="2"
+                 TickPlacement="BottomRight"
+                 Orientation="Vertical"
+                 Minimum="0"
+                 Value="{Binding ElementName=myMap, Path=ZoomLevel}"
+                 Maximum="21" ValueChanged="Slider_ValueChanged">
+
+        </Slider>
+
+
+
+    </Grid>
+</Window>
